@@ -7,7 +7,8 @@ class ArticlesController < ApplicationController
     if search_query.blank?
       @articles = Article.all
     else
-      @articles = Article.where(:name => search_query)
+      @articles = Article.where("name ilike :q", :q => "%#{search_query}%")
+      # @articles = Article.where("name ilike %batman%")
     end
 
     respond_to do |format|
