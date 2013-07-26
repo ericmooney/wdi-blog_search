@@ -7,7 +7,7 @@ class ArticlesController < ApplicationController
     if search_query.blank?
       @articles = Article.all
     else
-      @articles = Article.where("name ilike :q or content ilike :q", :q => "%#{search_query}%")
+      @articles = Article.where("name @@ :q or content @@ :q", :q => "%#{search_query}%")
       # @articles = Article.where("name ilike %batman%")
     end
 
